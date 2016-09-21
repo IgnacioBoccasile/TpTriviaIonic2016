@@ -1,0 +1,25 @@
+.padding
+{
+	background-image: url(FondoAutor.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+	text-align: center;
+}
+
+.padding2
+{
+	background-image: url(FondoTrivia.png);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+	text-align: center;
+}
+
+.padding3
+{
+	background-image: url(FondoInicio.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+}
