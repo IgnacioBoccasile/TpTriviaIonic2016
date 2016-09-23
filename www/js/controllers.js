@@ -4,82 +4,106 @@ angular.module('starter.controllers', ['ngCordova'])
 
 .controller('TriviaCtrl', function($scope, $cordovaNativeAudio, $cordovaVibration, $timeout, $window) {
 	
-	$scope.Preguntas = [];
+	$scope.misPreguntas = [];
 	
-	$scope.Preguntas = new Firebase('https://tptrivia-63793.firebaseio.com/preguntas');
+	$scope.misPreguntas = new Firebase('https://tptrivia-63793.firebaseio.com/preguntas');
 	
-	$scope.NumeroRandom = Math.floor((Math.random() * 3) + 1);
+	$scope.numeroAleatorio = Math.floor((Math.random() * 40) + 1);
 	
-	$scope.Preguntas.on('child_added', function(snapshot) 
+	$scope.misPreguntas.on('child_added', function (snapshot) 
 	{
 		$timeout(function()
 		{
 			var message = snapshot.val();
 
-			if(message.id == $scope.NumeroRandom)
-			{
-				$scope.pregElegida = message;
+			if(message.id == $scope.numeroAleatorio)
+			{		
+				$scope.preguntaRandom = message;
 				
-				$scope.respuesta = message.respuesta;			
+				$scope.Respuesta = message.respuesta;	
 			}
 		});
 	});
 	
-	$scope.Validar = function(respuestaElegida)
+	$scope.verificarOpcionElegida = function(opElegida)
 	{
-		if(respuestaElegida === $scope.respuesta)
-		{
-			$cordovaNativeAudio.play('RespuestaCorrecta');
+		if(opElegida === $scope.Respuesta)
+		{	
+			try
+			{
+				$cordovaVibration.vibrate(200);   			
+			}
 			
-			document.getElementById(respuestaElegida).className = "button button-large  button-balanced";
+			catch(Exception)
+			{
+				console.log(Exception.Message);
+			}
 			
 			try
 			{
-				$cordovaVibration.vibrate(300);   
+				$cordovaNativeAudio.play('Correcto');
 			}
 			
-			catch(ex)
+			catch(Exception)
 			{
-				console.log(ex);
+				console.log(Exception.Message);
 			}
+				
+			document.getElementById(opElegida).className = "button button-block button-balanced";		
 		}
 		
 		else
-		{
-			$cordovaNativeAudio.play('RespuestaIncorrecta');
-			
-			document.getElementById(respuestaElegida).className = "button button-large button-assertive";
-			
+		{	
 			try
 			{ 
-				$cordovaVibration.vibrate([300,300,300]);
+				$cordovaVibration.vibrate([200,200,200]);			
             }
 			
 			catch(ex)
 			{
 				console.log(ex);
 			}
+			
+			try
+			{
+				$cordovaNativeAudio.play('Incorrecto');
+			}
+			
+			catch(Exception)
+			{
+				console.log(Exception.Message);
+			}
+		
+			document.getElementById(opElegida).className = "button button-block button-assertive";		
 		}
 	}
-	
-	//document.getElementById(op1).className = "button button-assertive";
 
-	$scope.Desh = false;
+	$scope.bloqueado = false;
 	
-	$scope.Deshabilitar = function()
+	$scope.bloquear = function()
 	{
-		$scope.Desh = true;
+		$scope.bloqueado = true;
 		
-		return $scope.Desh;
+		return $scope.bloqueado;
 	}
 
-    $scope.siguientePregunta = function() 
+    $scope.pasarDePregunta = function() 
 	{ 
+		try
+		{
+			$cordovaVibration.vibrate(30);
+		}
+		
+		catch(Exception)
+		{
+			console.log(Exception.Message);
+		}
+		
 		$window.location.reload();
 	}
 })
 
-.controller('InicioCtrl', function($scope, $ionicPlatform, $cordovaNativeAudio, $cordovaVibration){
+.controller('InicioCtrl', function($scope, $cordovaNativeAudio, $cordovaVibration, $timeout){
 	
 	$scope.bandera = false;
 	
@@ -115,8 +139,6 @@ angular.module('starter.controllers', ['ngCordova'])
 			var message = snapshot.val();
 			
 			$scope.MisMensajes.push(message);
-			
-			console.log($scope.MisMensajes);
 		});
 	});			
 });

@@ -1,11 +1,10 @@
 <ion-view view-title="Trivia: Mortal Kombat">
   <ion-content class="padding2">
-	<br>
-    <h3><font color="white">{{pregElegida.pregunta}}</font></h3><br>
-    <button id="op1" ng-click="Deshabilitar();Validar('op1')" class="button button-positive"  ng-disabled="Desh">{{pregElegida.opciones.op1}}</button><br><br>
-    <button id="op2" ng-click="Deshabilitar();Validar('op2')" class="button button-positive" ng-disabled="Desh">{{pregElegida.opciones.op2}}</button><br><br>
-    <button id="op3" ng-click="Deshabilitar();Validar('op3')" class="button button-positive" ng-disabled="Desh">{{pregElegida.opciones.op3}}</button><br><br>
-    <button class="button button-positive" ng-click="siguientePregunta()" ng-if="Desh">Siguiente</button>
-    
+    </br><h4><font color="white">{{preguntaRandom.pregunta}}</font></h4><br>
+    <button id="op1" ng-click="bloquear();verificarOpcionElegida('op1')" class="button button-block button-positive" ng-disabled="bloqueado">{{preguntaRandom.opciones.op1}}</button>
+    <button id="op2" ng-click="bloquear();verificarOpcionElegida('op2')" class="button button-block button-positive" ng-disabled="bloqueado">{{preguntaRandom.opciones.op2}}</button>
+    <button id="op3" ng-click="bloquear();verificarOpcionElegida('op3')" class="button button-block button-positive" ng-disabled="bloqueado">{{preguntaRandom.opciones.op3}}</button>
+	<button id="op4" ng-click="bloquear();verificarOpcionElegida('op4')" class="button button-block button-positive" ng-disabled="bloqueado">{{preguntaRandom.opciones.op4}}</button></br>
+    <button class="button button large button-positive" ng-click="pasarDePregunta()" ng-if="bloqueado">Cambiar Pregunta</button>
   </ion-content>
 </ion-view>
