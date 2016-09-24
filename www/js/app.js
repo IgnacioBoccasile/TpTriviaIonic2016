@@ -14,6 +14,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
 		window.plugins.NativeAudio.preloadSimple('Guardar', 'audio/Guardar.mp3');
 		window.plugins.NativeAudio.preloadSimple('Correcto', 'audio/Correcto.mp3');
 		window.plugins.NativeAudio.preloadSimple('Incorrecto', 'audio/Incorrecto.mp3');
+		window.plugins.NativeAudio.preloadSimple('Sig', 'audio/Sig.mp3');
 	}
   });
 })

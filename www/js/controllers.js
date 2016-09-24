@@ -91,7 +91,8 @@ angular.module('starter.controllers', ['ngCordova'])
 	{ 
 		try
 		{
-			$cordovaVibration.vibrate(30);
+			$cordovaVibration.vibrate(50);
+			$cordovaNativeAudio.play('Sig');
 		}
 		
 		catch(Exception)
@@ -140,5 +141,5 @@ angular.module('starter.controllers', ['ngCordova'])
 			
 			$scope.MisMensajes.push(message);
 		});
-	});			
+	});		
 });
